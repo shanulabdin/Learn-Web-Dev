@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Animation</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0d1336;
+    }
+    .loader{
+      background-color: none;
+      border: 5px solid rgb(52, 140, 255);
+      border-radius: 5px;
+      box-shadow: 0px 0px 15px 5px rgba(52, 140, 255, 0.5), inset 0px 0px 15px 5px rgba(52, 140, 255, 0.5);
+      height: 50px;
+      width: 50px;
+      top: 50%;
+      left: 50%;
+
+      animation: loading 2s infinite;
+    }
+
+    @keyframes loading{
+      0%{
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      33%{
+        transform: rotateX(180deg) rotateY(0deg) rotateZ(0deg);
+      }
+      67%{
+        transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
+      }
+      100%{
+        transform: rotateX(180deg) rotateY(180deg) rotateZ(180deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader"> 
+    <span class="block"></span>
+  </div>
+</body>
+</html>
