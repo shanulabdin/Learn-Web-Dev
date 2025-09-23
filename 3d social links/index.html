@@ -4,114 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animated Social Icons</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-/* layout so you can see it working */
-* { box-sizing: border-box; }
-body { min-height: 100vh; margin: 0; display: grid; place-items: center; background:#0e0f12; }
-ul { list-style: none; display: flex; gap: 24px; padding: 0; margin: 0; }
-li { position: relative; }
+    * { 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      min-height: 100vh; 
+      margin: 0; 
+      display: grid; 
+      place-items: center; 
+      background:#0e0f12; 
+    }
 
-/* ul li:nth-child(1) { margin-top: 30px; }
-ul li:nth-child(2) { margin-top: 60px; }
-ul li:nth-child(3) { margin-top: 90px; }
-ul li:nth-child(4) { margin-top: 120px; } */
+    ul { 
+      list-style: none; 
+      display: flex; 
+      gap: 24px; 
+      padding: 0; 
+      margin: 0; 
+    }
 
-/* clickable tile */
-li > a{
-  text-decoration: none;
-  
-  position: relative;
-  display: block;
-  width: 76px;
-  height: 76px;
-  border-radius: 16px;
-}
+    li { 
+      position: relative; 
+    }
 
-/* the 4 flying layers (NOT the icon) */
-li > a span:not(.fa-brands){
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  background: rgba(255,255,255,.08);
-  transition: transform .45s ease, opacity .3s ease, background .3s ease;
-  /* start slightly stacked so it already looks layered */
-  transform: translate(0,0) translateZ(0);
-  /* subtle glow so layers stay visible outside the tile */
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
-}
+    li > a{
+      text-decoration: none;
+      position: relative;
+      display: block;
+      width: 76px;
+      height: 76px;
+      border-radius: 16px;
+    }
 
-/* the actual FA icon */
-/* 1) animate the icon too */
-li > a .fa-brands{
-  position: relative;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  font-size: 30px;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,.35);
-  transition: transform .45s ease;   /* <— this was missing */
-}
+    li > a span:not(.fa-brands){
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+      transition: transform .45s ease, opacity .3s ease, background .3s ease;
+      transform: translate(0,0) translateZ(0);
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
+    }
 
-
-/* LIFT + TRAIL — same directions you had, now with depth */
-li:hover > a span:nth-of-type(1){ transform: translate(0px,-10px) translateZ(10px); }
-li:hover > a span:nth-of-type(2){ transform: translate(0px,-20px) translateZ(20px); }
-li:hover > a span:nth-of-type(3){ transform: translate(0px,-30px) translateZ(30px); }
-li:hover > a span:nth-of-type(4){ transform: translate(0px,-40px) translateZ(40px); }
-/* if you want the 5th (icon) to move too, keep this; otherwise remove it */
-
-/* 2) move the icon together with the top layer */
-li:hover > a .fa-brands{
-  transform: translate(0px, -40px) translateZ(40px); /* match nth-of-type(4) */
-}
-
-/* opacity stack */
-a span:nth-of-type(1){ opacity:.2; }
-a span:nth-of-type(2){ opacity:.4; }
-a span:nth-of-type(3){ opacity:.6; }
-a span:nth-of-type(4){ opacity:.8; }
-
-/* platform gradients on hover (your originals) */
-li:nth-of-type(1):hover span{
-  background-color:#d6249f;
-  background-image:linear-gradient(270deg,#fdf497,#d6249f,#285aeb);
-  background-size:800% 800%;
-  animation:gradient 10s ease infinite;
-}
-li:nth-of-type(2):hover span{
-  background-color:#3b5998;
-  background-image:linear-gradient(270deg,#3b5998,#6293ff);
-  background-size:400% 400%;
-  animation:gradient 6s ease infinite;
-}
-li:nth-of-type(3):hover span{
-  background-color:#00acee;
-  background-image:linear-gradient(270deg,#4cbdff,#91d7ff);
-  background-size:400% 400%;
-  animation:gradient 6s ease infinite;
-}
-li:nth-of-type(4):hover span{
-  background-color:#6441a5;
-  background-image:linear-gradient(270deg,#6441a5,#b9a3e3);
-  background-size:400% 400%;
-  animation:gradient 6s ease infinite;
-}
-
-@keyframes gradient{
-  0%{ background-position:0% 50%; }
-  50%{ background-position:100% 50%; }
-  100%{ background-position:0% 50%; }
-}
+    li > a .fa-brands{
+      position: relative;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      font-size: 30px;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+      transition: transform .45s ease;
+    }
 
 
+    li:hover > a span:nth-of-type(1){ transform: translate(0px,-10px) translateZ(10px); }
+    li:hover > a span:nth-of-type(2){ transform: translate(0px,-20px) translateZ(20px); }
+    li:hover > a span:nth-of-type(3){ transform: translate(0px,-30px) translateZ(30px); }
+    li:hover > a span:nth-of-type(4){ transform: translate(0px,-40px) translateZ(40px); }
 
-  </style>
+    li:hover > a .fa-brands{
+      transform: translate(0px, -40px) translateZ(40px);
+    }
+
+    a span:nth-of-type(1){ opacity:.2; }
+    a span:nth-of-type(2){ opacity:.4; }
+    a span:nth-of-type(3){ opacity:.6; }
+    a span:nth-of-type(4){ opacity:.8; }
+
+    li:nth-of-type(1):hover span{
+      background-color:#d6249f;
+      background-image:linear-gradient(270deg,#fdf497,#d6249f,#285aeb);
+      background-size:800% 800%;
+      animation:gradient 10s ease infinite;
+    }
+    li:nth-of-type(2):hover span{
+      background-color:#3b5998;
+      background-image:linear-gradient(270deg,#3b5998,#6293ff);
+      background-size:400% 400%;
+      animation:gradient 6s ease infinite;
+    }
+    li:nth-of-type(3):hover span{
+      background-color:#00acee;
+      background-image:linear-gradient(270deg,#4cbdff,#91d7ff);
+      background-size:400% 400%;
+      animation:gradient 6s ease infinite;
+    }
+    li:nth-of-type(4):hover span{
+      background-color:#6441a5;
+      background-image:linear-gradient(270deg,#6441a5,#b9a3e3);
+      background-size:400% 400%;
+      animation:gradient 6s ease infinite;
+    }
+
+    @keyframes gradient{
+      0%{ background-position:0% 50%; }
+      50%{ background-position:100% 50%; }
+      100%{ background-position:0% 50%; }
+    }
+</style>
 </head>
 <body>
   <ul>
