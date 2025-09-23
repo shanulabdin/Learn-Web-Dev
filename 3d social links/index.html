@@ -19,7 +19,7 @@
       background:#0e0f12; 
     }
 
-    ul { 
+    .social-list { 
       list-style: none; 
       display: flex; 
       gap: 24px; 
@@ -27,11 +27,11 @@
       margin: 0; 
     }
 
-    li { 
-      position: relative; 
-    }
+    /* List item */
+    .social-item { position: relative; }
 
-    li > a{
+    /* Links */
+    .social-link {
       text-decoration: none;
       position: relative;
       display: block;
@@ -40,7 +40,8 @@
       border-radius: 16px;
     }
 
-    li > a span:not(.fa-brands){
+    /* Layer backgrounds */
+    .social-layer {
       position: absolute;
       inset: 0;
       border-radius: 16px;
@@ -50,7 +51,8 @@
       filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
     }
 
-    li > a .fa-brands{
+    /* The actual FA icon */
+    .social-icon {
       position: relative;
       z-index: 3;
       display: grid;
@@ -63,91 +65,99 @@
       transition: transform .45s ease;
     }
 
+    /* Hover transforms */
+    .social-item:hover .social-layer:nth-of-type(1){ transform: translate(0px,-10px) translateZ(10px); }
+    .social-item:hover .social-layer:nth-of-type(2){ transform: translate(0px,-20px) translateZ(20px); }
+    .social-item:hover .social-layer:nth-of-type(3){ transform: translate(0px,-30px) translateZ(30px); }
+    .social-item:hover .social-layer:nth-of-type(4){ transform: translate(0px,-40px) translateZ(40px); }
 
-    li:hover > a span:nth-of-type(1){ transform: translate(0px,-10px) translateZ(10px); }
-    li:hover > a span:nth-of-type(2){ transform: translate(0px,-20px) translateZ(20px); }
-    li:hover > a span:nth-of-type(3){ transform: translate(0px,-30px) translateZ(30px); }
-    li:hover > a span:nth-of-type(4){ transform: translate(0px,-40px) translateZ(40px); }
-
-    li:hover > a .fa-brands{
+    .social-item:hover .social-icon {
       transform: translate(0px, -40px) translateZ(40px);
     }
 
-    a span:nth-of-type(1){ opacity:.2; }
-    a span:nth-of-type(2){ opacity:.4; }
-    a span:nth-of-type(3){ opacity:.6; }
-    a span:nth-of-type(4){ opacity:.8; }
+    /* Layer opacities */
+    .social-link .social-layer:nth-of-type(1){ opacity:.2; }
+    .social-link .social-layer:nth-of-type(2){ opacity:.4; }
+    .social-link .social-layer:nth-of-type(3){ opacity:.6; }
+    .social-link .social-layer:nth-of-type(4){ opacity:.8; }
 
-    li:nth-of-type(1):hover span{
+    /* Gradients per platform */
+    .social-instagram:hover .social-layer {
       background-color:#d6249f;
       background-image:linear-gradient(270deg,#fdf497,#d6249f,#285aeb);
       background-size:800% 800%;
-      animation:gradient 10s ease infinite;
+      animation:social-gradient 10s ease infinite;
     }
-    li:nth-of-type(2):hover span{
+    .social-facebook:hover .social-layer {
       background-color:#3b5998;
       background-image:linear-gradient(270deg,#3b5998,#6293ff);
       background-size:400% 400%;
-      animation:gradient 6s ease infinite;
+      animation:social-gradient 6s ease infinite;
     }
-    li:nth-of-type(3):hover span{
+    .social-twitter:hover .social-layer {
       background-color:#00acee;
       background-image:linear-gradient(270deg,#4cbdff,#91d7ff);
       background-size:400% 400%;
-      animation:gradient 6s ease infinite;
+      animation:social-gradient 6s ease infinite;
     }
-    li:nth-of-type(4):hover span{
+    .social-twitch:hover .social-layer {
       background-color:#6441a5;
       background-image:linear-gradient(270deg,#6441a5,#b9a3e3);
       background-size:400% 400%;
-      animation:gradient 6s ease infinite;
+      animation:social-gradient 6s ease infinite;
     }
 
-    @keyframes gradient{
+    /* Gradient animation */
+    @keyframes social-gradient {
       0%{ background-position:0% 50%; }
       50%{ background-position:100% 50%; }
       100%{ background-position:0% 50%; }
     }
-</style>
+  </style>
 </head>
 <body>
-  <ul>
-    <li>
-      <a class="icon1" href="#">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <div class="fa-brands fa-instagram"></div>
-      </a>
-    </li>
-    <li>
-      <a class="icon2" href="#">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <div class="fa-brands fa-facebook-f"></div>
-      </a>
-    </li>
-    <li>
-      <a class="icon3" href="#">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <div class="fa-brands fa-twitter"></div>
-      </a>
-    </li>
-    <li>
-      <a class="icon4" href="#">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <div class="fa-brands fa-twitch"></div>
-      </a>
-    </li>
-  </ul>
+  <div>
+
+    <ul class="social-list">
+      <li class="social-item">
+        <a class="social-link social-instagram" href="#">
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <div class="social-icon fa-brands fa-instagram"></div>
+        </a>
+      </li>
+      <li class="social-item">
+        <a class="social-link social-facebook" href="#">
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <div class="social-icon fa-brands fa-facebook-f"></div>
+        </a>
+      </li>
+      <li class="social-item">
+        <a class="social-link social-twitter" href="#">
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <div class="social-icon fa-brands fa-twitter"></div>
+        </a>
+      </li>
+      <li class="social-item">
+        <a class="social-link social-twitch" href="#">
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <span class="social-layer"></span>
+          <div class="social-icon fa-brands fa-twitch"></div>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
 </body>
 </html>
