@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Social Icons</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+/* --- base layout / reset --- */
+* { box-sizing: border-box; }
+body { min-height: 100vh; display: grid; place-items: center; margin: 0; background:#0e0f12; }
+ul { list-style: none; display: flex; gap: 20px; padding: 0; margin: 0; }
+li { position: relative; }
+
+/* the clickable icon block */
+li > a {
+  position: relative;
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 14px;
+  overflow: hidden;
+  
+  text-decoration: none;
+}
+
+/* the 4 background layers you animate */
+li > a span:not(.fa-brands) {
+  position: absolute;
+  inset: 0;                 /* top:0 right:0 bottom:0 left:0 */
+  border-radius: 14px;
+  background: rgba(255,255,255,.08);
+  transform: translate(0,0);
+  transition: transform .45s ease, background .3s ease, opacity .3s ease;
+}
+
+/* the actual icon (5th span) */
+li > a .fa-brands {
+  position: relative;       /* keep above the moving spans */
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  color: #fff;
+
+}
+
+/* your hover + gradient rules (kept from your code) */
+li:hover > a span:nth-of-type(1) { transform: translate(10px, -10px); }
+li:hover > a span:nth-of-type(2) { transform: translate(20px, -20px); }
+li:hover > a span:nth-of-type(3) { transform: translate(30px, -30px); }
+li:hover > a span:nth-of-type(4) { transform: translate(40px, -40px); }
+li:hover > a span:nth-of-type(5) { transform: translate(50px, -50px); }
+
+a span:nth-of-type(1) { opacity: .2; }
+a span:nth-of-type(2) { opacity: .4; }
+a span:nth-of-type(3) { opacity: .6; }
+a span:nth-of-type(4) { opacity: .8; }
+a span:nth-of-type(5) { opacity: 1; }
+
+/* per-icon gradients */
+li:nth-of-type(1):hover span { 
+  background-color:#d6249f; 
+  background-image:linear-gradient(270deg,#fdf497,#d6249f,#285aeb);
+  background-size:800% 800%; animation:gradient 10s ease infinite;
+}
+li:nth-of-type(2):hover span { 
+  background-color:#3b5998; 
+  background-image:linear-gradient(270deg,#3b5998,#383838);
+  background-size:400% 400%; animation:gradient 6s ease infinite;
+}
+li:nth-of-type(3):hover span { 
+  background-color:#00acee; 
+  background-image:linear-gradient(270deg,#4cbdff,#00acee);
+  background-size:400% 400%; animation:gradient 6s ease infinite;
+}
+li:nth-of-type(4):hover span { 
+  background-color:#6441a5; 
+  background-image:linear-gradient(270deg,#6441a5,#b9a3e3);
+  background-size:400% 400%; animation:gradient 6s ease infinite;
+}
+/* 
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+} */
+
+
+
+
+  </style>
+</head>
+<body>
+  <ul>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa-brands fa-instagram"></span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa-brands fa-facebook-f"></span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa-brands fa-twitter"></span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="fa-brands fa-twitch"></span>
+      </a>
+    </li>
+  </ul>
+</body>
+</html>
