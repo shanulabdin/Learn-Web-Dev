@@ -8,88 +8,102 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-/* --- base layout / reset --- */
+/* layout so you can see it working */
 * { box-sizing: border-box; }
-body { min-height: 100vh; display: grid; place-items: center; margin: 0; background:#0e0f12; }
-ul { list-style: none; display: flex; gap: 20px; padding: 0; margin: 0; }
+body { min-height: 100vh; margin: 0; display: grid; place-items: center; background:#0e0f12; }
+ul { list-style: none; display: flex; gap: 24px; padding: 0; margin: 0; }
 li { position: relative; }
 
-/* the clickable icon block */
-li > a {
+/* clickable tile */
+li > a{
+  text-decoration: none;
+  
   position: relative;
   display: block;
-  width: 70px;
-  height: 70px;
-  border-radius: 14px;
-  overflow: hidden;
-  
-  text-decoration: none;
+  width: 76px;
+  height: 76px;
+  border-radius: 16px;
+  /* IMPORTANT: allow overflow so trails show outside */
+  overflow: visible;
+  /* fake border without clipping children */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  /* 3D stage so children can “lift” */
+  perspective: 600px;
+  transform-style: preserve-3d;
 }
 
-/* the 4 background layers you animate */
-li > a span:not(.fa-brands) {
+/* the 4 flying layers (NOT the icon) */
+li > a span:not(.fa-brands){
   position: absolute;
-  inset: 0;                 /* top:0 right:0 bottom:0 left:0 */
-  border-radius: 14px;
+  inset: 0;
+  border-radius: 16px;
   background: rgba(255,255,255,.08);
-  transform: translate(0,0);
-  transition: transform .45s ease, background .3s ease, opacity .3s ease;
+  transition: transform .45s ease, opacity .3s ease, background .3s ease;
+  /* start slightly stacked so it already looks layered */
+  transform: translate(0,0) translateZ(0);
+  /* subtle glow so layers stay visible outside the tile */
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
 }
 
-/* the actual icon (5th span) */
-li > a .fa-brands {
-  position: relative;       /* keep above the moving spans */
-  z-index: 2;
+/* the actual FA icon */
+li > a .fa-brands{
+  position: relative;
+  z-index: 3;
   display: grid;
   place-items: center;
   width: 100%;
   height: 100%;
   font-size: 30px;
   color: #fff;
-
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
 }
 
-/* your hover + gradient rules (kept from your code) */
-li:hover > a span:nth-of-type(1) { transform: translate(10px, -10px); }
-li:hover > a span:nth-of-type(2) { transform: translate(20px, -20px); }
-li:hover > a span:nth-of-type(3) { transform: translate(30px, -30px); }
-li:hover > a span:nth-of-type(4) { transform: translate(40px, -40px); }
-li:hover > a span:nth-of-type(5) { transform: translate(50px, -50px); }
+/* LIFT + TRAIL — same directions you had, now with depth */
+li:hover > a span:nth-of-type(1){ transform: translate(10px,-10px) translateZ(10px); }
+li:hover > a span:nth-of-type(2){ transform: translate(20px,-20px) translateZ(20px); }
+li:hover > a span:nth-of-type(3){ transform: translate(30px,-30px) translateZ(30px); }
+li:hover > a span:nth-of-type(4){ transform: translate(40px,-40px) translateZ(40px); }
+/* if you want the 5th (icon) to move too, keep this; otherwise remove it */
+li:hover > a span:nth-of-type(5){ transform: translate(50px,-50px) translateZ(50px); }
 
-a span:nth-of-type(1) { opacity: .2; }
-a span:nth-of-type(2) { opacity: .4; }
-a span:nth-of-type(3) { opacity: .6; }
-a span:nth-of-type(4) { opacity: .8; }
-a span:nth-of-type(5) { opacity: 1; }
+/* opacity stack */
+a span:nth-of-type(1){ opacity:.2; }
+a span:nth-of-type(2){ opacity:.4; }
+a span:nth-of-type(3){ opacity:.6; }
+a span:nth-of-type(4){ opacity:.8; }
+a span:nth-of-type(5){ opacity:1; }
 
-/* per-icon gradients */
-li:nth-of-type(1):hover span { 
-  background-color:#d6249f; 
+/* platform gradients on hover (your originals) */
+li:nth-of-type(1):hover span{
+  background-color:#d6249f;
   background-image:linear-gradient(270deg,#fdf497,#d6249f,#285aeb);
-  background-size:800% 800%; animation:gradient 10s ease infinite;
+  background-size:800% 800%;
+  animation:gradient 10s ease infinite;
 }
-li:nth-of-type(2):hover span { 
-  background-color:#3b5998; 
+li:nth-of-type(2):hover span{
+  background-color:#3b5998;
   background-image:linear-gradient(270deg,#3b5998,#383838);
-  background-size:400% 400%; animation:gradient 6s ease infinite;
+  background-size:400% 400%;
+  animation:gradient 6s ease infinite;
 }
-li:nth-of-type(3):hover span { 
-  background-color:#00acee; 
+li:nth-of-type(3):hover span{
+  background-color:#00acee;
   background-image:linear-gradient(270deg,#4cbdff,#00acee);
-  background-size:400% 400%; animation:gradient 6s ease infinite;
+  background-size:400% 400%;
+  animation:gradient 6s ease infinite;
 }
-li:nth-of-type(4):hover span { 
-  background-color:#6441a5; 
+li:nth-of-type(4):hover span{
+  background-color:#6441a5;
   background-image:linear-gradient(270deg,#6441a5,#b9a3e3);
-  background-size:400% 400%; animation:gradient 6s ease infinite;
+  background-size:400% 400%;
+  animation:gradient 6s ease infinite;
 }
-/* 
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-} */
 
+@keyframes gradient{
+  0%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+  100%{ background-position:0% 50%; }
+}
 
 
 
