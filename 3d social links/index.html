@@ -46,6 +46,7 @@ li > a span:not(.fa-brands){
 }
 
 /* the actual FA icon */
+/* 1) animate the icon too */
 li > a .fa-brands{
   position: relative;
   z-index: 3;
@@ -56,7 +57,11 @@ li > a .fa-brands{
   font-size: 30px;
   color: #fff;
   text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  transition: transform .45s ease;   /* <— this was missing */
 }
+
+
+
 
 /* LIFT + TRAIL — same directions you had, now with depth */
 li:hover > a span:nth-of-type(1){ transform: translate(10px,-10px) translateZ(10px); }
@@ -64,7 +69,12 @@ li:hover > a span:nth-of-type(2){ transform: translate(20px,-20px) translateZ(20
 li:hover > a span:nth-of-type(3){ transform: translate(30px,-30px) translateZ(30px); }
 li:hover > a span:nth-of-type(4){ transform: translate(40px,-40px) translateZ(40px); }
 /* if you want the 5th (icon) to move too, keep this; otherwise remove it */
-li:hover > a span:nth-of-type(5){ transform: translate(50px,-50px) translateZ(50px); }
+/* li:hover > a span:nth-of-type(5){ transform: translate(50px,-50px) translateZ(50px); } */
+
+/* 2) move the icon together with the top layer */
+li:hover > a .fa-brands{
+  transform: translate(40px, -40px) translateZ(40px); /* match nth-of-type(4) */
+}
 
 /* opacity stack */
 a span:nth-of-type(1){ opacity:.2; }
