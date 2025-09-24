@@ -21,13 +21,13 @@
     .card{
       width: 400px;
       height: 350px;
-      background-color: white;
+      background-color: rgb(75, 75, 75);
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       font-family: Arial, sans-serif;
       font-size: 24px;
       text-align: center;
-      color: #333;
+      color: #ffffff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 20px;
 
@@ -46,13 +46,13 @@
       height: 100%;
       width: 100%;
 
-      background-image: conic-gradient(from var(--angle), transparent 70%, blue);
+      background-image: conic-gradient(from var(--angle), transparent 70%, rgb(177, 9, 255));
       top: 50%;
       left: 50%;
 
       translate: -50% -50%;
       z-index: -1;
-      padding: 10px;
+      padding: 5px;
       border-radius: 15px;
 
       animation: 3s spin linear infinite;
@@ -61,7 +61,7 @@
 
     .card::before{
       filter: blur(20px);
-      opacity: 0.5;
+      opacity: 0.8;
     }
 
     @keyframes spin{
