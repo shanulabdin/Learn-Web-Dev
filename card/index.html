@@ -11,7 +11,7 @@
       box-sizing: border-box;
     }
     body{
-      background-color: gray;;
+      background-color: rgb(49, 49, 49);;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,7 +22,7 @@
       width: 400px;
       height: 350px;
       background-color: white;
-      border-radius: 15px;
+      border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       font-family: Arial, sans-serif;
       font-size: 24px;
@@ -30,8 +30,49 @@
       color: #333;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 20px;
+
+      position: relative;
     }
     
+    @property --angle{
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    .card::after, .card::before{
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+
+      background-image: conic-gradient(from var(--angle), transparent 70%, blue);
+      top: 50%;
+      left: 50%;
+
+      translate: -50% -50%;
+      z-index: -1;
+      padding: 10px;
+      border-radius: 15px;
+
+      animation: 3s spin linear infinite;
+      
+    }
+
+    .card::before{
+      filter: blur(20px);
+      opacity: 0.5;
+    }
+
+    @keyframes spin{
+      from{
+        --angle: 0deg;
+      }
+      to{
+        --angle: 360deg;
+      }
+    }
+
     p{
       margin-top: 10px;
       padding: 0 20px;
