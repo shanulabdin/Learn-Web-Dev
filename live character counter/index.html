@@ -18,7 +18,7 @@
   <main>
     <h2>Live Character Counter</h2>
     <textarea id="message" placeholder="Type Something..."></textarea>
-    <p>Characters: <span id="count">0</span></p>
+    <p>Characters: <span id="count">0</span>/10</p>
   </main>
 </body>
 
@@ -26,9 +26,13 @@
   const message = document.querySelector('#message');
   const count = document.querySelector('#count');
 
-  console.log(message.innerHTML)
   message.addEventListener('input', function() {
-    count.textContent = message.value.length
+    let textCount = message.value.length
+    count.textContent = textCount;
+    
+    if(textCount >= 10){
+      message.disabled = true;
+    }
   })
 </script>
 </html>
