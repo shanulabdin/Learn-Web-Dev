@@ -25,12 +25,13 @@
 <script>
   const message = document.querySelector('#message');
   const count = document.querySelector('#count');
+  const limit = 10;
 
-  message.addEventListener('input', function() {
-    if(message.value.length > 10){
-      message.value = message.value.slice(0, 10);
+  message.addEventListener('input', () => {
+    if(message.value.length >= limit){
+      message.value = message.value.slice(0, 10)
     }
-    count.textContent = message.value.length
+    count.textContent = message.value.length;
   })
 </script>
 </html>
