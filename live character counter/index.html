@@ -27,12 +27,10 @@
   const count = document.querySelector('#count');
 
   message.addEventListener('input', function() {
-    let textCount = message.value.length
-    count.textContent = textCount;
-    
-    if(textCount >= 10){
-      message.disabled = true;
+    if(message.value.length > 10){
+      message.value = message.value.slice(0, 10);
     }
+    count.textContent = message.value.length
   })
 </script>
 </html>
