@@ -14,14 +14,14 @@ function updateNumber(){
 }
 rem.addEventListener('click', () => {
   countNum--;
-  updateNumber()
+  updateNumber();
 })
 inc.addEventListener('click', () => {
   countNum++;
-  updateNumber()
+  updateNumber();
 })
 reset.addEventListener('click', () => {
   countNum = 0;
-  updateNumber()
+  updateNumber();
 })
-updateNumber()
+updateNumber();
