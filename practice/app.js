@@ -3,7 +3,10 @@ const count = document.querySelector('#count');
 const inc = document.querySelector('#inc');
 const reset = document.querySelector('#reset');
 
-let countNum = 0;
+const key = 'counter:value';
+
+let countNum = Number(localStorage.getItem(key)) || 0;
+
 const min = 0;
 const max = 10;
 
@@ -11,17 +14,29 @@ function updateNumber(){
   count.textContent = countNum;
   inc.disabled = (countNum >= max);
   rem.disabled = (countNum <= min);
+  console.log(countNum);
 }
+
+function setCount(next){
+  countNum = next;
+  localStorage.setItem(key, countNum);
+  updateNumber();
+}
+
 rem.addEventListener('click', () => {
-  countNum--;
-  updateNumber();
+  if(countNum > min){
+    setCount(countNum - 1);
+  }
 })
+
 inc.addEventListener('click', () => {
-  countNum++;
-  updateNumber();
+  if(countNum < max){
+    setCount(countNum + 1)
+  }
 })
+
 reset.addEventListener('click', () => {
-  countNum = 0;
-  updateNumber();
+  setCount(0);
 })
+
 updateNumber();
