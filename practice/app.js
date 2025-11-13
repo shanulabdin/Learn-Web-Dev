@@ -5,7 +5,7 @@ const reset = document.querySelector('#reset');
 
 const key = 'counter:value';
 
-let countNum = Number(localStorage.getItem(key)) || 0;
+let countNum = (localStorage.getItem(key)) || 0;
 
 const min = 0;
 const max = 10;
@@ -14,11 +14,10 @@ function updateNumber(){
   count.textContent = countNum;
   inc.disabled = (countNum >= max);
   rem.disabled = (countNum <= min);
-  console.log(countNum);
 }
 
-function setCount(next){
-  countNum = next;
+function setCount(nextNum){
+  countNum = nextNum;
   localStorage.setItem(key, countNum);
   updateNumber();
 }
@@ -31,7 +30,7 @@ rem.addEventListener('click', () => {
 
 inc.addEventListener('click', () => {
   if(countNum < max){
-    setCount(countNum + 1)
+    setCount(countNum + 1);
   }
 })
 
