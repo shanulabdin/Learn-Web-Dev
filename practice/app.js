@@ -5,15 +5,18 @@ const reset = document.querySelector('#reset');
 
 let countNum = 0;
 
+function updateNumber(){
+  count.textContent = countNum;
+}
 rem.addEventListener('click', () => {
   countNum--;
-  count.textContent = countNum;
+  updateNumber()
 })
 inc.addEventListener('click', () => {
   countNum++;
-  count.textContent = countNum;
+  updateNumber()
 })
 reset.addEventListener('click', () => {
   countNum = 0;
-  count.textContent = countNum;
+  updateNumber()
 })
