@@ -21,10 +21,9 @@
       flex-direction: column;
       margin: 10px;
     }
-    input{
+    input, select, option{
       padding: 8px;
       width: 200px;
-      margin-top: 10px;
     }
     textarea{
       font-family: Arial, Helvetica, sans-serif;
@@ -53,8 +52,20 @@
       method="POST"
     >
       <label>
+        Your name
+        <input type="text" name="name">
+      </label>
+      <label>
         Your email
         <input type="email" name="email">
+      </label>
+      <label>
+        Your email
+        <select name="select">
+          <option value="one-page">One-page</option>
+          <option value="3-page">3-page</option>
+          <option value="full-website">Full-website</option>
+        </select>
       </label>
       <label>
         Your message
