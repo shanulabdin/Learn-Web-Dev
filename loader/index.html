@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loader</title>
+  <style>
+    body{
+      height: 95vh;
+      width: 95vw;
+      background-color: gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #loader{
+      height: 100px;
+      width: 100px;
+      border: 6px solid white;
+      border-radius: 50%;
+      border-top-color: black;
+      animation: spin 1s infinite;
+    }
+    @keyframes spin {
+      100%{
+        rotate: 360deg;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="loader"></div>
+</body>
+</html>
