@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      min-height: 90vh;
+      background-color: rgb(36, 36, 36);
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      color: white;
+      font-size: 40px;
+      font-weight: 900;
+      font-family: sans-serif;
+      text-decoration: none;
+      display: flex;
+      overflow: hidden;
+      /* This crops the text as it rolls */
+      height: 1.1em;
+      /* Keeps the container tight to one line */
+      line-height: 1.1em;
+    }
+
+    a span {
+      position: relative;
+      display: inline-block;
+      text-transform: uppercase;
+      transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+      /* The delay is set via a variable --i */
+      transition-delay: calc(var(--i) * 0.03s);
+    }
+
+    /* The shadow text effect */
+    a span::after {
+      content: attr(data-letter);
+      /* Gets the letter from HTML */
+      position: absolute;
+      top: 100%;
+      /* Positions the clone directly below */
+      left: 0;
+      color: orange;
+      /* Change color of the "roll-in" text */
+    }
+
+    a:hover span {
+      /* Moves the original up and the pseudo-element into view */
+      transform: translateY(-100%);
+    }
+  </style>
+</head>
+
+<body class="app">
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js"></script>
+<script>
+  const app = new PIXI.Application({ width: 600, height: 600 });
+  document.body.appendChild(app.view);
+
+  // Load your two images
+  const img = PIXI.Sprite.from('img.png');
+  const depthMap = PIXI.Sprite.from('depth.png');
+
+  // Create the Displacement Filter
+  const displacementFilter = new PIXI.DisplacementFilter(depthMap);
+  app.stage.addChild(img);
+  app.stage.addChild(depthMap); // Depth map needs to be in the stage
+  img.filters = [displacementFilter];
+
+  // Make it move with the mouse
+  window.addEventListener('mousemove', (e) => {
+    // The '20' is the intensity of the 3D effect
+    displacementFilter.scale.x = (window.innerWidth / 2 - e.clientX) / 50;
+    displacementFilter.scale.y = (window.innerHeight / 2 - e.clientY) / 50;
+  });
+</script>
+
+</html>
