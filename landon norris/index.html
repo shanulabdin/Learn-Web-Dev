@@ -20,7 +20,7 @@
     }
 
     a {
-      color: orange;
+      color: white;
       font-size: 40px;
       font-weight: 900;
       font-family: sans-serif;
@@ -50,7 +50,7 @@
       top: 100%;
       /* Positions the clone directly below */
       left: 0;
-      color: white;
+      color: orange;
       /* Change color of the "roll-in" text */
     }
 
@@ -63,11 +63,29 @@
 
 <body class="app">
   <a href="#">
-    <span style="--i:0" data-letter="H">H</span>
-    <span style="--i:1" data-letter="O">O</span>
-    <span style="--i:2" data-letter="M">M</span>
-    <span style="--i:3" data-letter="E">E</span>
+    HOME
+  </a>
+  <a href="#">
+    Services
+  </a>
+  <a href="#">
+    Projects
+  </a>
+  <a href="#">
+    Reviews
+  </a>
+  <a href="#">
+    Contact
   </a>
 </body>
+
+<script>
+  document.querySelectorAll('a').forEach(link => {
+    const letters = link.innerText.split("");
+    link.innerHTML = letters
+      .map((l, i) => `<span style="--i:${i}" data-letter="${l}">${l}</span>`)
+      .join("");
+  });
+</script>
 
 </html>
