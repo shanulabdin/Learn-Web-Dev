@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Comment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0f0f0f;
+      font-family: Roboto, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .comment-section {
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── Comment ────────────────────────────── */
+    .comment {
+      display: flex;
+      gap: 12px;
+    }
+
+    .comment-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #272727;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .comment-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .comment-body {
+      flex: 1;
+    }
+
+    /* Header: name + time */
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .comment-author {
+      color: #f1f1f1;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .comment-author.owner {
+      background: #272727;
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    .comment-time {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    /* Text */
+    .comment-text {
+      color: #f1f1f1;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      word-wrap: break-word;
+    }
+
+    /* Action buttons row */
+    .comment-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: -8px;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .action-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .like-count {
+      color: #aaa;
+      font-size: 12px;
+      margin-right: 4px;
+    }
+
+    .dislike-btn svg {
+      transform: rotate(180deg);
+    }
+
+    .reply-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #f1f1f1;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: Roboto, sans-serif;
+      padding: 8px 12px;
+      border-radius: 18px;
+      transition: background 0.2s;
+    }
+
+    .reply-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* View replies toggle */
+    .view-replies-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #3ea6ff;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: Roboto, sans-serif;
+      padding: 8px 12px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+
+    .view-replies-btn:hover {
+      background: rgba(62, 166, 255, 0.15);
+    }
+
+    .view-replies-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #3ea6ff;
+    }
+
+    /* Replies (nested) */
+    .replies {
+      margin-top: 12px;
+      padding-left: 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .replies .comment-avatar {
+      width: 24px;
+      height: 24px;
+      font-size: 12px;
+    }
+
+    .heart-icon {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .heart-icon .creator-avatar {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -2px;
+      right: -4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="comment-section">
+
+    <!-- Comment 1 (with replies) -->
+    <div class="comment-thread">
+      <div class="comment">
+        <div class="comment-avatar">S</div>
+        <div class="comment-body">
+          <div class="comment-header">
+            <span class="comment-author owner">@shantist</span>
+            <span class="comment-time">2 days ago</span>
+          </div>
+          <div class="comment-text">
+            This is one of the best tutorials I've ever watched. The way you explain complex concepts in simple terms is amazing. Keep up the great work! 🔥
+          </div>
+          <div class="comment-actions">
+            <button class="action-btn like-btn" title="Like">
+              <svg viewBox="0 0 24 24">
+                <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+              </svg>
+            </button>
+            <span class="like-count">142</span>
+            <button class="action-btn dislike-btn" title="Dislike">
+              <svg viewBox="0 0 24 24">
+                <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+              </svg>
+            </button>
+            <button class="reply-btn">Reply</button>
+          </div>
+
+          <!-- View replies button -->
+          <button class="view-replies-btn" onclick="toggleReplies(this)">
+            <svg viewBox="0 0 24 24">
+              <path d="M7.41,8.59L12,13.17l4.59-4.58L18,10l-6,6l-6-6L7.41,8.59z"/>
+            </svg>
+            2 replies
+          </button>
+        </div>
+      </div>
+
+      <!-- Replies (hidden by default) -->
+      <div class="replies" style="display: none;">
+        <div class="comment">
+          <div class="comment-avatar">A</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">@alexcodes</span>
+              <span class="comment-time">1 day ago</span>
+            </div>
+            <div class="comment-text">
+              Totally agree! Subscribed immediately after this video.
+            </div>
+            <div class="comment-actions">
+              <button class="action-btn like-btn" title="Like">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+                </svg>
+              </button>
+              <span class="like-count">23</span>
+              <button class="action-btn dislike-btn" title="Dislike">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+                </svg>
+              </button>
+              <button class="reply-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="comment">
+          <div class="comment-avatar">M</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">@maria.dev</span>
+              <span class="comment-time">18 hours ago</span>
+            </div>
+            <div class="comment-text">
+              @shantist Could you do a follow-up on advanced CSS animations? 🙏
+            </div>
+            <div class="comment-actions">
+              <button class="action-btn like-btn" title="Like">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+                </svg>
+              </button>
+              <span class="like-count">8</span>
+              <button class="action-btn dislike-btn" title="Dislike">
+                <svg viewBox="0 0 24 24">
+                  <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+                </svg>
+              </button>
+              <button class="reply-btn">Reply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment 2 (standalone) -->
+    <div class="comment-thread">
+      <div class="comment">
+        <div class="comment-avatar">J</div>
+        <div class="comment-body">
+          <div class="comment-header">
+            <span class="comment-author">@jakebuilds</span>
+            <span class="comment-time">5 hours ago</span>
+          </div>
+          <div class="comment-text">
+            Who else is watching this in 2026? 😂
+          </div>
+          <div class="comment-actions">
+            <button class="action-btn like-btn" title="Like">
+              <svg viewBox="0 0 24 24">
+                <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+              </svg>
+            </button>
+            <span class="like-count">57</span>
+            <button class="action-btn dislike-btn" title="Dislike">
+              <svg viewBox="0 0 24 24">
+                <path d="M18.77,11h-4.23l1.52-4.94C16.38,5.03,15.54,4,14.38,4c-0.58,0-1.14,0.24-1.52,0.65L7,11H1v10h6h0.01h2.35 c0.18,0,0.36-0.02,0.54-0.07L15.52,19h0.01h2.25c1.1,0,2-0.82,2.18-1.87l0.82-4.94C20.99,11.08,20.12,11,18.77,11z M7,20H3v-8 h4V20z M19.78,12.31l-0.82,4.94C18.88,17.69,18.48,18,18.01,18h-2.25l-5.6,1.93C10.03,19.98,9.9,20,9.77,20H8v-8.28l5.87-6.37 C13.98,5.24,14.17,5.15,14.38,5.15c0.47,0,0.85,0.42,0.71,0.87L13.38,11H18.77c0.59,0,1.08,0.46,1.01,1.05V12.31z"/>
+              </svg>
+            </button>
+            <button class="reply-btn">Reply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleReplies(btn) {
+      const thread = btn.closest('.comment-thread');
+      const replies = thread.querySelector('.replies');
+      const svg = btn.querySelector('svg');
+
+      if (replies.style.display === 'none') {
+        replies.style.display = 'flex';
+        svg.style.transform = 'rotate(180deg)';
+      } else {
+        replies.style.display = 'none';
+        svg.style.transform = 'rotate(0deg)';
+      }
+    }
+  </script>
+
+</body>
+
+</html>
